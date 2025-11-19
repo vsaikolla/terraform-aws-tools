@@ -18,3 +18,8 @@ data "aws_ami" "ami_info" {
         values = ["hvm"]
     }
 }
+
+data "aws_route53_zone" "sainath.online" {
+  name         = "sainath.online"
+  private_zone = true
+}

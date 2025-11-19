@@ -28,3 +28,19 @@ module "jenkins_agent" {
     Name = "jenkins-agent"
   }
 }
+
+resource "aws_route53_record" "jenkins" {
+  zone_id = aws_route53_zone.sainath.online.zone_id
+  name    = "sainath.online"
+  type    = "A"
+  ttl     = 1
+  records = [module.jenkins.public_ip]
+}
+
+resource "aws_route53_record" "jenkins_agent" {
+  zone_id = aws_route53_zone.sainath.online.zone_id
+  name    = "sainath.online"
+  type    = "A"
+  ttl     = 1
+  records = [module.jenkins_agent.private_ip]
+}
