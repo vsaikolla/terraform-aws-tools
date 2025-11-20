@@ -19,26 +19,26 @@ data "aws_ami" "ami_info" {
     }
 }
 
-data "aws_ami" "nexus_ami_info" {
+# data "aws_ami" "nexus_ami_info" {
 
-    most_recent = true
-    owners = ["679593333241"]
+#     most_recent = true
+#     owners = ["679593333241"]
 
-    filter {
-        name   = "name"
-        values = ["SolveDevOps-Nexus-Server-Ubuntu*"]
-    }
+#     filter {
+#         name   = "name"
+#         values = ["SolveDevOps-Nexus-Server-RedHat-20250120-9f023a0e-prod-k32ueodvhytcq"]
+#     }
 
-    filter {
-        name   = "root-device-type"
-        values = ["ebs"]
-    }
+#     filter {
+#         name   = "root-device-type"
+#         values = ["ebs"]
+#     }
 
-    filter {
-        name   = "virtualization-type"
-        values = ["hvm"]
-    }
-}
+#     filter {
+#         name   = "virtualization-type"
+#         values = ["hvm"]
+#     }
+# }
 
 data "aws_route53_zone" "zone_name" {
   name         = "sainath.online"
