@@ -36,17 +36,17 @@ resource "aws_key_pair" "tools" {
 module "nexus" {
   source  = "terraform-aws-modules/ec2-instance/aws"
 
-  name = "jenkins-agent"
+  name = "nexus"
   create_security_group = false
-  instance_type          = "t3.small"
+  instance_type          = "t3.medium"
   vpc_security_group_ids = ["sg-012a82dc2ac8e30ea"]
   subnet_id = "subnet-0e33ccaf834d4a0c6"
-  ami = "ami-02144fa731a399515"
+  ami = data.aws_ami.nexus_ami_info.id
   key_name = aws_key_pair.tools.key_name
-  # root_block_device = {
-  #     volume_type = "gp3"
-  #     volume_size = 30
-  # }
+  root_block_device = {
+      volume_type = "gp3"
+      volume_size = 30
+  }
   
   tags = {
     Name = "nexus"
