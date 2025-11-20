@@ -4,8 +4,8 @@ module "jenkins" {
   name = "jenkins-tf"
   create_security_group = false
   instance_type          = "t3.small"
-  vpc_security_group_ids = ["sg-012a82dc2ac8e30ea"] 
-  subnet_id = "subnet-0e33ccaf834d4a0c6" 
+  vpc_security_group_ids = ["sg-0c19efa45b0e41ccb"] 
+  subnet_id = "subnet-0e33ccaac8e30eaf834d4a0c6" 
   ami = data.aws_ami.ami_info.id
   user_data = file("jenkins.sh")
   tags = {
@@ -19,7 +19,7 @@ module "jenkins_agent" {
   name = "jenkins-agent"
   create_security_group = false
   instance_type          = "t3.small"
-  vpc_security_group_ids = ["sg-012a82dc2ac8e30ea"]
+  vpc_security_group_ids = ["sg-0c19efa45b0e41ccb"]
   subnet_id = "subnet-0e33ccaf834d4a0c6"
   ami = data.aws_ami.ami_info.id
   user_data = file("jenkins-agent.sh")
@@ -39,15 +39,16 @@ module "nexus" {
   name = "nexus"
   create_security_group = false
   instance_type          = "t3.medium"
-  vpc_security_group_ids = ["sg-012a82dc2ac8e30ea"]
+  vpc_security_group_ids = ["sg-0c19efa45b0e41ccb"]
   subnet_id = "subnet-0e33ccaf834d4a0c6"
   ami = data.aws_ami.nexus_ami_info.id
   key_name = aws_key_pair.tools.key_name
-  root_block_device = {
+  root_block_device = [
+    {
       volume_type = "gp3"
       volume_size = 30
-  }
-  
+    }
+  ]
   tags = {
     Name = "nexus"
   }

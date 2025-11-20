@@ -40,6 +40,7 @@ data "aws_ami" "nexus_ami_info" {
     }
 }
 
+
 data "aws_route53_zone" "zone_name" {
   name         = "sainath.online"
 }
