@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
         bucket = "sainath-remote"
-        key = "expense-dev-jenkins"
+        key = "expense-dev-tools"
         region = "us-east-1"
         dynamodb_table = "sainath-locking"
     
