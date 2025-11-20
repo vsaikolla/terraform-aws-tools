@@ -5,7 +5,7 @@ module "jenkins" {
   create_security_group = false
   instance_type          = "t3.small"
   vpc_security_group_ids = ["sg-0c19efa45b0e41ccb"] 
-  subnet_id = "subnet-0e33ccaac8e30eaf834d4a0c6" 
+  subnet_id = "subnet-0e33ccaf834d4a0c6" 
   ami = data.aws_ami.ami_info.id
   user_data = file("jenkins.sh")
   tags = {
@@ -43,12 +43,10 @@ module "nexus" {
   subnet_id = "subnet-0e33ccaf834d4a0c6"
   ami = data.aws_ami.nexus_ami_info.id
   key_name = aws_key_pair.tools.key_name
-  root_block_device = [
-    {
-      volume_type = "gp3"
-      volume_size = 30
-    }
-  ]
+  root_block_device = {
+    volume_type = "gp3"
+    volume_size = 30
+  }
   tags = {
     Name = "nexus"
   }
@@ -59,6 +57,7 @@ resource "aws_route53_record" "jenkins" {
   name    = "jenkins.sainath.online"
   type    = "A"
   ttl     = 1
+  allow_overwrite = true
   records = [module.jenkins.public_ip]
 }
 
@@ -67,6 +66,7 @@ resource "aws_route53_record" "jenkins_agent" {
   name    = "jenkins-agent.sainath.online"
   type    = "A"
   ttl     = 1
+  allow_overwrite = true
   records = [module.jenkins_agent.private_ip]
 }
 
@@ -75,5 +75,6 @@ resource "aws_route53_record" "nexus" {
   name    = "nexus.sainath.online"
   type    = "A"
   ttl     = 1
+  allow_overwrite = true
   records = [module.nexus.public_ip]
 }
