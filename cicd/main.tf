@@ -29,7 +29,7 @@ module "jenkins_agent" {
   }
 }
 resource "aws_key_pair" "tools" {
-  key_name = tools
+  key_name = "tools"
   public_key = file("~/.ssh/tools.pub")
 }
 
