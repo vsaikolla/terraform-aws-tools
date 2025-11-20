@@ -39,7 +39,6 @@ module "nexus" {
   # convert StringList to list and get first element
   subnet_id = "subnet-0e33ccaf834d4a0c6"
   ami = data.aws_ami.nexus_ami_info.id
-  user_data = file("jenkins-agent.sh")
   tags = {
     Name = "nexus"
   }
