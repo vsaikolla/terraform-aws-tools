@@ -19,7 +19,7 @@ data "aws_ami" "ami_info" {
     }
 }
 
-data "aws_route53_zone" "sainath.online" {
+data "aws_route53_zone" "zone_name" {
   name         = "sainath.online"
   private_zone = true
 }

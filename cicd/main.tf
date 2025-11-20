@@ -30,7 +30,7 @@ module "jenkins_agent" {
 }
 
 resource "aws_route53_record" "jenkins" {
-  zone_id = aws_route53_zone.sainath.online.zone_id
+  zone_id = aws_route53_zone.zone_name.zone_id
   name    = "sainath.online"
   type    = "A"
   ttl     = 1
@@ -38,7 +38,7 @@ resource "aws_route53_record" "jenkins" {
 }
 
 resource "aws_route53_record" "jenkins_agent" {
-  zone_id = aws_route53_zone.sainath.online.zone_id
+  zone_id = aws_route53_zone.zone_name.zone_id
   name    = "sainath.online"
   type    = "A"
   ttl     = 1
