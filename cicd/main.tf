@@ -27,9 +27,10 @@ module "jenkins_agent" {
     Name = "jenkins-agent"
   }
 }
-resource "aws_key_pair" "tools" {
-  key_name = "tools"
-  public_key = file("~/.ssh/tools.pub")
+
+resource "aws_key_pair" "tool" {
+  key_name = "tool"
+  public_key = file("~/.ssh/tool.pub")
 }
 
 
@@ -42,7 +43,7 @@ module "nexus" {
   vpc_security_group_ids = ["sg-0c19efa45b0e41ccb"]
   subnet_id = "subnet-0e33ccaf834d4a0c6"
   ami = data.aws_ami.nexus_ami_info.id
-  key_name = aws_key_pair.tools.key_name
+  key_name = aws_key_pair.tool.key_name
   root_block_device = {
     volume_type = "gp3"
     volume_size = 30
